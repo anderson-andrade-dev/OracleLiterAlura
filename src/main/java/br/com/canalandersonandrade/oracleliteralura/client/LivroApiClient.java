@@ -1,7 +1,7 @@
 package br.com.canalandersonandrade.oracleliteralura.client;
 
 import br.com.canalandersonandrade.oracleliteralura.config.ConfigLoader;
-import br.com.canalandersonandrade.oracleliteralura.records.BookRecord;
+import br.com.canalandersonandrade.oracleliteralura.records.BooksRecord;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,7 +16,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.Optional;
-import java.util.logging.Level;
 
 
 /**
@@ -39,7 +38,7 @@ public class LivroApiClient {
                 .create();
     }
 
-    public Optional<BookRecord> requisitarBook(String paramentro) {
+    public Optional<BooksRecord> requisitarBook(String paramentro) {
         String urlApi = String.format("%s%s", url, paramentro);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(urlApi))
@@ -56,7 +55,7 @@ public class LivroApiClient {
 
             if (response.statusCode() == 200) {
 
-                return Optional.of(gson.fromJson(response.body(), BookRecord.class));
+                return Optional.of(gson.fromJson(response.body(), BooksRecord.class));
 
             } else {
                 logger.error(String.format("Erro na Conexão %s", response.statusCode()));

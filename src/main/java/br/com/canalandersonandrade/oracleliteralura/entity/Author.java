@@ -9,6 +9,6 @@ import java.time.LocalDate;
 public class Author {
     private Long id;
     private String name;
-    private int birth_year;
-    private int death_year;
+    private int birthYear;
+    private int deathYear;
 }

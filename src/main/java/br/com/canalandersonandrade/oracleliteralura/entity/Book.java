@@ -15,10 +15,25 @@ public class Book {
     private List<String>bookshelves;
     private List<String>languages;
     private boolean copyright;
-    private String media_type;
+    private String mediaType;
     private Map<String,String> formats;
-    private Double download_count;
+    private Double downloadCount;
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", authors=" + authors +
+                ", translators=" + translators +
+                ", bookshelves=" + bookshelves +
+                ", languages=" + languages +
+                ", copyright=" + copyright +
+                ", mediaType='" + mediaType + '\'' +
+                ", formats=" + formats +
+                ", downloadCount=" + downloadCount +
+                '}';
+    }
 }
 
 
