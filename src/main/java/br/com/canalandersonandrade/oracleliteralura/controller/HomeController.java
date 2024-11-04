@@ -1,15 +1,12 @@
 package br.com.canalandersonandrade.oracleliteralura.controller;
 
 import br.com.canalandersonandrade.oracleliteralura.client.LivroApiClient;
+import br.com.canalandersonandrade.oracleliteralura.services.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Anderson Andrade Dev
@@ -21,10 +18,12 @@ public class HomeController {
 
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
     private final LivroApiClient livroApiClient;
+    private final BookService bookService;
 
 
-    public HomeController(LivroApiClient livroApiClient) {
+    public HomeController(LivroApiClient livroApiClient, BookService bookService) {
         this.livroApiClient = livroApiClient;
+        this.bookService = bookService;
     }
 
     @GetMapping
@@ -38,5 +37,11 @@ public class HomeController {
     @GetMapping("teste")
     public String teste(){
          return livroApiClient.requisitarBook("search=Dom%20Casmurro").get().toString();
+    }
+
+    @ResponseBody
+    @GetMapping("buscaPorNome")
+    public String bascaNomeAutor(@RequestParam("nome") String nomeAutor){
+        return bookService.findBook(nomeAutor).get().toString();
     }
 }
